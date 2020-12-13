@@ -7,16 +7,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>MyProject ImageBoard</title>
-<link href="${pageContext.request.contextPath}/styles/mainStyle.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/mainStyle.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@1,500&display=swap" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
 	<div class="big-block">
-		<a href="${pageContext.request.contextPath}/threadCreate" class="button-link">Create New Thread</a>
+		<a href="${pageContext.request.contextPath}/thread/save" class="button-link">Create New Thread</a>
 		<div class="thread-container">
 			<c:forEach items="${requestScope.threadList}" var="thr">
 				<div class="thread-block">
+					<p>Creation date: ${thr.formatDate}</p>
 					<p><b>${thr.theme}</b></p>
 					<p>
 						${fn:substring(thr.value, 0, 25)}
@@ -24,7 +25,7 @@
 							...
 						</c:if>
 					</p>
-					<a href="${pageContext.request.contextPath}/threadPage?id=${thr.threadId}">read thread...</a>
+					<a href="${pageContext.request.contextPath}/thread/${thr.threadId}">read thread...</a>
 				</div>
 			</c:forEach>
 		</div>

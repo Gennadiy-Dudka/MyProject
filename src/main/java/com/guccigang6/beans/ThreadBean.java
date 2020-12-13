@@ -1,30 +1,63 @@
 package com.guccigang6.beans;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="thread")
 public class ThreadBean {
-	private String userName;
-	private String value;
-	private String theme;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="thread_id")
 	private int threadId;
-	private String modificationDate;
-	private String creationDate;
 	
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	@ManyToOne
+	@JoinColumn(name="user_name")
+	private UserAccount user;
+	
+	@Column(name="value")
+	private String value;
+	
+	@Column(name="theme")
+	private String theme;
+	
+	@Column(name="creation_date")
+	private LocalDateTime creationDate;
+	
+	@OneToMany(mappedBy = "thread", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<CommentBean> comments;
+	
+	public ThreadBean() {}
+	
+	public String getFormatDate() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		return creationDate.format(formatter);
 	}
 	
-	public String getModificationDate() {
-		return modificationDate;
+	public UserAccount getUser() {
+		return user;
 	}
-	public void setModificationDate(String modificationDate) {
-		this.modificationDate = modificationDate;
+	public void setUser(UserAccount user) {
+		this.user = user;
 	}
-	public String getCreationDate() {
+	
+	public LocalDateTime getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(String creationDate) {
+	public void setCreationDate(LocalDateTime creationDate) {
 		this.creationDate = creationDate;
 	}
 	public int getThreadId() {
@@ -45,6 +78,13 @@ public class ThreadBean {
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
-	
+
+	public Set<CommentBean> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentBean> comments) {
+		this.comments = comments;
+	}
 	
 }

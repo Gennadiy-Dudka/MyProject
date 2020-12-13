@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>MyProject ImageBoard</title>
-<link href="${pageContext.request.contextPath}/styles/mainStyle.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/mainStyle.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@1,500&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -13,7 +13,7 @@
 	<div class="big-block">
 		<h3>Log in Page</h3>
 		<p class="errorMessage">${errorString}</p>
-		<form method="POST" action="${pageContext.request.contextPath}/login">
+		<form method="POST" action="${pageContext.request.contextPath}/logIn">
 			<table border=0>
 				<tr>
 					<td>User Name</td>

@@ -13,7 +13,7 @@
 	<div class="big-block">
 		<h3>Sign up Page</h3>
 		<p class="errorMessage">${errorString}</p>
-		<form method="POST" action="${pageContext.request.contextPath}/signup">
+		<form method="POST" action="${pageContext.request.contextPath}/signUp">
 			<table border=0>
 				<tr>
 					<td>User Name</td>

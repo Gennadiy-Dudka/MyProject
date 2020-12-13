@@ -8,11 +8,11 @@
 			<c:choose>
 				<c:when test="${loginedUser != null}">
 					Hello ${loginedUser.userName}
-					<a href="${pageContext.request.contextPath}/logout">Log out</a>
+					<a href="${pageContext.request.contextPath}/logOut">Log out</a>
 				</c:when>
 				<c:otherwise>
-					<a href="${pageContext.request.contextPath}/login">Log in</a>
-					<a href="${pageContext.request.contextPath}/signup">Sign up</a>
+					<a href="${pageContext.request.contextPath}/logIn">Log in</a>
+					<a href="${pageContext.request.contextPath}/signUp">Sign up</a>
 				</c:otherwise>
 			</c:choose>
 		</div>

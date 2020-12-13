@@ -11,15 +11,15 @@
 <body>
 	<jsp:include page="_header.jsp"/>
 	<div class="big-block">
-		<form method="POST" action="${pageContext.request.contextPath}/threadCreate">
+		<form method="POST" action="${pageContext.request.contextPath}/thread/save">
 			<table border=0>
 			<tr>
 				<td>Thread topic</td>
-				<td><textarea name="theme" cols="40" rows="3"></textarea> </td>
+				<td><textarea name="theme" cols="40" rows="3" >${thread.theme }</textarea> </td>
 			</tr>
 			<tr>
 				<td>Thread body</td>
-				<td><textarea name="value" cols="40" rows="5"></textarea> </td>
+				<td><textarea name="value" cols="40" rows="5" >${thread.value }</textarea> </td>
 			</tr>
 			<tr>
 				<td colspan="2">
