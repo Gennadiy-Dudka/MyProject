@@ -24,9 +24,9 @@ public class AppContext {
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] {"com.guccigang6.beans"});
-		sessionFactory.setHibernateProperties(hibernateProperties());
+		sessionFactory.setDataSource(dataSource());   								//bind sessionFactory and db
+		sessionFactory.setPackagesToScan(new String[] {"com.guccigang6.beans"});	//show entities to Factory
+		sessionFactory.setHibernateProperties(hibernateProperties());				//set additional properties
 		return sessionFactory;
 	}
 	

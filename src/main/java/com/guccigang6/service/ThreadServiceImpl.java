@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.guccigang6.beans.CommentBean;
 import com.guccigang6.beans.ThreadBean;
 import com.guccigang6.beans.UserAccount;
+import com.guccigang6.dao.CommentDAO;
 import com.guccigang6.dao.ThreadDAO;
 
 @Service
@@ -20,7 +21,7 @@ public class ThreadServiceImpl implements ThreadService{
 	ThreadDAO threadDao;
 	
 	@Autowired
-	CommentService commentService;
+	CommentDAO commentDao;
 
 	@Override
 	@Transactional
@@ -57,6 +58,6 @@ public class ThreadServiceImpl implements ThreadService{
 		comment.setThread(thread);
 		comment.setUser(user);
 		comment.setCreationDate(LocalDateTime.now());
-		commentService.saveComment(comment);
+		commentDao.saveComment(comment);
 	}
 }
