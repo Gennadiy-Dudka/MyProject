@@ -1,12 +1,10 @@
 package com.guccigang6.dao;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.guccigang6.beans.ThreadBean;
 
-public interface ThreadDAO {
-	List<ThreadBean> getThreads();
-	void saveThread(ThreadBean thread);
-	ThreadBean getThread(int id);
-	void deleteThread(int id);
+@Repository
+public interface ThreadDAO extends CrudRepository<ThreadBean, Integer>{
 }

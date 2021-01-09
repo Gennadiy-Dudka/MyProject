@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public List<UserAccount> getUsers() {
-		return userDao.getUsers();
+		return (List<UserAccount>) userDao.findAll();
 	}
 	
 	@Override
@@ -37,25 +37,25 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public void saveUser(UserAccount user) {
-		userDao.saveUser(user);
+		userDao.save(user);
 	}
 
 	@Override
 	@Transactional
 	public UserAccount getUser(String username) {
-		return userDao.getUser(username);
+		return userDao.findById(username).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void deleteUser(String username) {
-		userDao.deleteUser(username);
+		userDao.deleteById(username);
 	}
 	
 	@Override
 	@Transactional
 	public UserAccount getUser(String username, String password) {
-		return userDao.getUser(username, password);
+		return null;//userDao.findByUsernameAndPassword(username, password).orElse(null);
 	}
 
 }

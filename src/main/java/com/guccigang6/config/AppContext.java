@@ -9,9 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
@@ -22,12 +25,16 @@ public class AppContext {
 	private Environment environment;
 	
 	@Bean
-	public LocalSessionFactoryBean sessionFactory() {
-		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(dataSource());   								//bind sessionFactory and db
-		sessionFactory.setPackagesToScan(new String[] {"com.guccigang6.beans"});	//show entities to Factory
-		sessionFactory.setHibernateProperties(hibernateProperties());				//set additional properties
-		return sessionFactory;
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+		emf.setDataSource(dataSource());   								//bind sessionFactory and db
+		emf.setPackagesToScan(new String[] {"com.guccigang6.beans"});	//show entities to Factory
+		
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		emf.setJpaVendorAdapter(vendorAdapter);
+		emf.setJpaProperties(hibernateProperties());
+		
+		return emf;
 	}
 	
 	@Bean
@@ -50,9 +57,14 @@ public class AppContext {
         return properties;
 	}
 	
-	@Bean HibernateTransactionManager getTransactionManager() {
-		HibernateTransactionManager tm = new HibernateTransactionManager();
-		tm.setSessionFactory(sessionFactory().getObject());
+	@Bean JpaTransactionManager getTransactionManager() {
+		JpaTransactionManager tm = new JpaTransactionManager();
+		tm.setEntityManagerFactory(entityManagerFactory().getObject());
 		return tm;
+	}
+	
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+	    return new PersistenceExceptionTranslationPostProcessor();
 	}
 }

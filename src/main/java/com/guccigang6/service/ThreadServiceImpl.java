@@ -26,14 +26,14 @@ public class ThreadServiceImpl implements ThreadService{
 	@Override
 	@Transactional
 	public Set<CommentBean> getComments(int threadId) {
-		ThreadBean thread = threadDao.getThread(threadId);
+		ThreadBean thread = threadDao.findById(threadId).orElse(null);
 		return thread.getComments();
 	}
 
 	@Override
 	@Transactional
 	public List<ThreadBean> getThreads() {
-		return threadDao.getThreads();
+		return (List<ThreadBean>) threadDao.findAll();
 	}
 
 	
@@ -42,22 +42,22 @@ public class ThreadServiceImpl implements ThreadService{
 	public void saveThread(ThreadBean thread, UserAccount user) {
 		thread.setUser(user);
 		thread.setCreationDate(LocalDateTime.now());
-		threadDao.saveThread(thread);
+		threadDao.save(thread);
 	}
 	
 	@Override
 	@Transactional
 	public ThreadBean getThread(int id) {
-		return threadDao.getThread(id);
+		return threadDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void saveComment(CommentBean comment, int id, UserAccount user) {
-		ThreadBean thread = threadDao.getThread(id);
+		ThreadBean thread = threadDao.findById(id).orElse(null);
 		comment.setThread(thread);
 		comment.setUser(user);
 		comment.setCreationDate(LocalDateTime.now());
-		commentDao.saveComment(comment);
+		commentDao.save(comment);
 	}
 }
