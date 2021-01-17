@@ -4,12 +4,12 @@
   <artifactId>myProject</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>MyProject</name>
+  <name>MyProjec</name>
   
   <properties>
   	<failOnMissingWebXml>false</failOnMissingWebXml>
-  	<spring.version>5.1.0.RELEASE</spring.version>
-  	<springData.version>2.3.4.RELEASE</springData.version>
+  	<spring.version>5.1.5.RELEASE</spring.version>
+  	<springData.version>2.1.5.RELEASE</springData.version>
   	<hibernate.version>5.3.5.Final</hibernate.version>
   	<hibernate.validator>5.4.1.Final</hibernate.validator>
   	<jstl.version>1.2.1</jstl.version>
@@ -26,16 +26,6 @@
   		<version>4.13</version>
   		<scope>test</scope>
   	</dependency>
-  	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-core</artifactId>
-	    <version>${spring.version}</version>
-	</dependency>
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-expression</artifactId>
-	    <version>${spring.version}</version>
-	</dependency>
   	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-context</artifactId>

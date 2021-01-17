@@ -10,5 +10,5 @@ import com.guccigang6.beans.UserAccount;
 @Repository
 public interface UserAccountDAO extends CrudRepository<UserAccount, String>{
 	
-	//Optional<UserAccount> findByUsernameAndPassword(String username, String password);
+	Optional<UserAccount> findByUserNameAndPassword(String username, String password);
 }

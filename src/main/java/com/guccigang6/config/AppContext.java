@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource("classpath:database.properties")
+@EnableJpaRepositories(basePackages= {"com.guccigang6.dao"})
 @EnableTransactionManagement
 public class AppContext {
 	@Autowired
@@ -57,7 +59,7 @@ public class AppContext {
         return properties;
 	}
 	
-	@Bean JpaTransactionManager getTransactionManager() {
+	@Bean JpaTransactionManager transactionManager() {
 		JpaTransactionManager tm = new JpaTransactionManager();
 		tm.setEntityManagerFactory(entityManagerFactory().getObject());
 		return tm;
